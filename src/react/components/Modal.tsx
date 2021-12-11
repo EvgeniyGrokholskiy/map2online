@@ -33,7 +33,8 @@ const Modal: React.FunctionComponent<{ onClose: () => void, closeOnEnter?: boole
       } else {
         const {target} = ev;
         const textArea = target && (target as unknown as {tagName: string}).tagName === 'TEXTAREA';
-        if (closeOnEnter && (ev.key === 'Enter' || ev.keyCode === KEY_ENTER) && !textArea) {
+        const richEditor = target && (target as unknown as {className: string}).className.indexOf('public-DraftEditor-content') >= 0;
+        if (closeOnEnter && (ev.key === 'Enter' || ev.keyCode === KEY_ENTER) && !textArea && !richEditor) {
           handleClose();
         }
       }

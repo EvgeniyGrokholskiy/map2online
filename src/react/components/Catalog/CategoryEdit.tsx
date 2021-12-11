@@ -22,9 +22,11 @@ import {Category} from '../../../catalog';
 import useObservable from '../../hooks/useObservable';
 import T from '../../../l10n';
 import {map} from 'rxjs/operators';
+import RichText from '../RichText';
 
 const wording = getWording();
 const catalogUI = getCatalogUI();
+// eslint-disable-next-line no-unused-vars
 const handleSubmit: (ev: FormEvent) => void = (ev: FormEvent) => {
   ev.preventDefault();
   // noinspection JSIgnoredPromiseFromCall
@@ -73,13 +75,17 @@ const CategoryEdit: React.FunctionComponent<{ category: Category }> = ({category
           {T`Description`}
         </label >
 
-        <textarea
-          name="description"
-          onChange={(ev): void => {
-            categoryEdit.description = ev.target.value;
-          }}
-          rows={10}
-          value={category.description} />
+        {/*
+          <textarea
+            name="description"
+            onChange={(ev): void => {
+              categoryEdit.description = ev.target.value;
+            }}
+            rows={10}
+            value={category.description} />
+        */}
+
+        <RichText />
       </div >
 
       <div className="buttons-row" >

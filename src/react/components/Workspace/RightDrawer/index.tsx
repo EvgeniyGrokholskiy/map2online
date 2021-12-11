@@ -23,6 +23,7 @@ import log from '../../../../log';
 import {getWorkspace} from '../../../../di-default';
 import useObservable from '../../../hooks/useObservable';
 import SettingsMenu from '../../SettingsMenu';
+import './style.scss';
 
 const PosedMenu = posed.div({
   hide: {
