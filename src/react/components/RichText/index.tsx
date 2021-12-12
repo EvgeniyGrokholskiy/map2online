@@ -15,33 +15,33 @@
  */
 
 import * as React from 'react';
-import {Editor, EditorState} from 'draft-js';
 import log from '../../../log';
 import './style.scss';
+import {useMemo, useState} from 'react';
+import {Descendant, createEditor} from 'slate';
+import {Editable, ReactEditor, Slate, withReact} from 'slate-react';
+import {withHistory} from 'slate-history';
+
+const initialValue: Descendant[] = [
+  {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    type: 'paragraph',
+    children: [{text: 'This is editable plain text, just like a <textarea>!'}],
+  },
+];
 
 const RichText: React.FunctionComponent = (): React.ReactElement => {
   log.render('RichText');
-  const [editorState, setEditorState] = React.useState(() => EditorState.createEmpty());
-  const [focusState, setFocusState] = React.useState<boolean>(editorState.getSelection().getHasFocus());
 
-  const editor = React.useRef(null);
+  const [value, setValue] = useState<Descendant[]>(initialValue);
+  const editor = useMemo(() => withHistory(withReact(createEditor() as ReactEditor)), []);
+  return (
+      <Slate editor={editor} onChange={v => setValue(v)} value={value} >
+        <Editable className="rich-text" placeholder="Enter some plain text..." />
+      </Slate >
+  );
 
-  const focusEditor = () => {
-    editor.current.focus();
-  };
-
-  return <div
-    className={`rich-text${focusState ? ' focused' : ''}`}
-    onBlur={() => setFocusState(false)}
-    onClick={focusEditor}
-    onFocus={() => setFocusState(true)}
-  >
-    <Editor
-      editorState={editorState}
-      onChange={setEditorState}
-      ref={editor}
-    />
-  </div >;
 };
 
 export default RichText;
