@@ -215,7 +215,7 @@ button {
 form {
   background-color: $form-bg;
 
-  .rich-text,
+  .rich-textarea,
   .drop-zone,
   input,
   textarea,
@@ -223,11 +223,11 @@ form {
     background: none;
     color: white;
     border: 2px dashed rgba(255, 255, 255, 0.5);
-    outline:none;
+    outline: none;
   }
 
   button:focus,
-  .rich-text:focus,
+  .rich-textarea:focus,
   input:focus,
   textarea:focus {
     background-color: rgba(255, 255, 255, 0.2);
@@ -264,6 +264,30 @@ form {
 
   .imported-folders svg {
     fill: white;
+  }
+
+  .rich-text {
+    .toolbar {
+      .menu {
+        .button {
+          &.active {
+            // background-color: rgba(255, 255, 255, 0.2);
+            color: rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted;
+
+      background-color: transparent;
+
+      &.selected {
+        box-shadow: 0 0 0 3px #ddd;
+      }
+    }
   }
 }
 

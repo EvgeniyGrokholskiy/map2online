@@ -152,22 +152,27 @@ const FeatureEdit: React.FunctionComponent<{ feature: Feature }> = ({feature: fe
           ? <input
               name="coordinates"
               onChange={(ev): void => {
-                setCoordinates(ev.target.value);
-                featureEdit.geometry = makeGeometry(ev.target.value);
-              }}
+              setCoordinates(ev.target.value);
+              featureEdit.geometry = makeGeometry(ev.target.value);
+            }}
               value={coordinates} />
           : <textarea
               name="coordinates"
               onChange={(ev): void => {
-                setCoordinates(ev.target.value);
-                featureEdit.geometry = makeGeometry(ev.target.value);
-              }}
+              setCoordinates(ev.target.value);
+              featureEdit.geometry = makeGeometry(ev.target.value);
+            }}
               rows={Math.max(Math.min(MIN_COORDINATES_ROWS, coordinates.length), MAX_COORDINATES_ROWS)}
               value={coordinates} />}
       </div >
 
       <div className="buttons-row" >
-        <ColorSelect isPoint={isPoint(featureEdit.geometry)} onColorSelect={(style) => {log.d(style); featureEdit.style=style}} selected={featureEdit.style} />
+        <ColorSelect
+          isPoint={isPoint(featureEdit.geometry)}
+          onColorSelect={(style) => {
+            log.d(style); featureEdit.style = style;
+          }}
+          selected={featureEdit.style} />
       </div>
 
       <div className="buttons-row" >

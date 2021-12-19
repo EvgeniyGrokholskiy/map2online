@@ -34,7 +34,7 @@ const Modal: React.FunctionComponent<{ onClose: () => void, closeOnEnter?: boole
         const {target} = ev;
         const textArea = target && (target as unknown as { tagName: string }).tagName === 'TEXTAREA';
         // eslint-disable-next-line no-unused-vars
-        const richEditor = target && (target as unknown as { hasAttribute: (name: string) => boolean}).hasAttribute('data-slate-editor')
+        const richEditor = target && (target as unknown as { hasAttribute: (name: string) => boolean}).hasAttribute('data-slate-editor');
         if (closeOnEnter && (ev.key === 'Enter' || ev.keyCode === KEY_ENTER) && !textArea && !richEditor) {
           handleClose();
         }

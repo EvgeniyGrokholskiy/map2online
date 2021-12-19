@@ -14,8 +14,62 @@
  * limitations under the License.
  */
 
-form {
-  .rich-text {
-    min-height: 10em;
+.rich-textarea {
+  padding: 4px;
+  height: 10em !important;
+  overflow-y: auto;
+  em {
+    font-style: italic;
+  }
+  strong {
+    font-weight: bold;
+  }
+  u {
+    text-decoration: underline;
+  }
+  code {
+    font-family: monospace, monospace;
+  }
+  h1 {
+    display: block;
+    font-weight: bold;
+    font-size: 120%;
+    padding-bottom: 0.8em;
+  }
+
+  h2 {
+    display: block;
+    font-weight: bold;
+    font-size: 110%;
+    padding-bottom: 0.8em;
+  }
+
+  ol {
+    list-style: decimal;
+    padding-inline-start: 2em;
+  }
+
+  ul {
+    list-style: circle;
+    padding-inline-start: 2em;
+  }
+
+  div.image {
+    position: relative;
+    padding-bottom: 0.5em;
+    img {
+      display: block;
+      max-width: 100%;
+      max-height: 8em;
+      box-shadow: none;
+      /*
+      &.focused {
+        box-shadow: 0 0 0 3px #B4D5FF;
+      }
+       */
+      &.selected {
+        box-shadow: 0 0 0 3px #B4D5FF;
+      }
+    }
   }
 }
