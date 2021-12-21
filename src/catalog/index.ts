@@ -18,6 +18,7 @@
 
 import {Observable} from 'rxjs';
 import {Style} from '../style';
+import {RichText} from '../richtext';
 
 export type ID = string;
 
@@ -119,7 +120,7 @@ export interface Routes extends Iterable<Route> {
 
 export interface CategoryProps {
   id: ID;
-  description: string;
+  description: RichText;
   summary: string;
   title: string;
   visible: boolean;

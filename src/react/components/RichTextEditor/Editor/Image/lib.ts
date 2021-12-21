@@ -17,7 +17,7 @@
 import {BaseEditor, Transforms, Node} from 'slate';
 import isUrl from 'is-url';
 import imageExtensions from 'image-extensions';
-import {EmptyText} from '../../types';
+import {EmptyText} from '../../../../../slate/types';
 
 type ImageElement = {
   type: 'image'

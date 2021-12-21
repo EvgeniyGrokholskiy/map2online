@@ -18,7 +18,7 @@ import React, {ReactElement} from 'react';
 import {RenderElementProps, useSelected} from 'slate-react';
 import log from '../../../../../log';
 import './style.scss';
-import {LinkElement} from '../../types';
+import {LinkElement} from '../../../../../slate/types';
 
 export type LinkProps = RenderElementProps & { element: LinkElement };
 

@@ -1,4 +1,4 @@
-import {Categories, Category, CategoryProps, ID, RouteProps, Routes} from '../index';
+import {Categories, Category, CategoryProps, ID, Routes} from '../index';
 import {makeId} from '../../lib/id';
 import {RouteDefault, RoutesDefault} from './route';
 import {Observable} from 'rxjs';
@@ -18,7 +18,7 @@ export class CategoryDefault implements Category {
   private makeDefs(): CategoryProps {
     return {
       id: makeId(),
-      description: '',
+      description: [],
       summary: '',
       title: this.catalog.wording.C('New category'),
       visible: true,
@@ -28,7 +28,7 @@ export class CategoryDefault implements Category {
 
   constructor(
     catalog: CatalogDefault,
-    props: RouteProps | null,
+    props: CategoryProps | null,
   ) {
     this.catalog = catalog;
     if (props === null) {
@@ -51,7 +51,7 @@ export class CategoryDefault implements Category {
 
   set description(value) {
     this.p.description = value;
-    this.update();
+    this.update().then();
   }
 
   readonly routes: Routes;
@@ -62,7 +62,7 @@ export class CategoryDefault implements Category {
 
   set summary(value) {
     this.p.summary = value;
-    this.update();
+    this.update().then();
   }
 
   get title() {
@@ -71,7 +71,7 @@ export class CategoryDefault implements Category {
 
   set title(value) {
     this.p.title = value;
-    this.update();
+    this.update().then();
   }
 
   get visible() {
@@ -81,7 +81,7 @@ export class CategoryDefault implements Category {
   set visible(value) {
     const notify = value !== this.p.visible;
     this.p.visible = value;
-    this.update();
+    this.update().then();
     if (notify) {
       this.catalog.notifyVisisbleFeaturesChanged();
     }
@@ -93,7 +93,7 @@ export class CategoryDefault implements Category {
 
   set open(value) {
     this.p.open = value;
-    this.update();
+    this.update().then();
   }
 
   update(): Promise<void> {
@@ -153,7 +153,7 @@ export class CategoriesDefault implements Categories {
     }
     if ((!ids || ids.length === 0) && this.catalog.wording.isPersonalized && this.catalog.autoCreate) {
       const category = new CategoryDefault(this.catalog, null);
-      this.addCategory(category); //  ignore async storage backend, use sync cache
+      this.addCategory(category).then(); //  ignore async storage backend, use sync cache
     }
     return this.idsCache[this.cacheKey];
   }

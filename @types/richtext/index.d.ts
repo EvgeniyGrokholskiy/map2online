@@ -14,20 +14,6 @@
  * limitations under the License.
  */
 
-import {expect} from 'chai';
-import '../../../src/extensions/string+format';
-import '../../../src/extensions/string+richtext';
-
-describe('Test string extension', () => {
-  it('format', () => {
-    const formatted = 'A = {1} B = {2}'.format(10, 'b');
-    expect(formatted).to.be.eq('A = 10 B = b');
-  });
-  it('toRichText', () => {
-    const serialized = '[{"a": 1}, {"b": 2}]';
-    const richText = serialized.toRichText();
-    expect(richText.length).to.be.eq(2);
-    expect(richText[0]).to.be.eql({a: 1});
-    expect(richText[1]).to.be.eql({b: 2});
-  });
-});
+declare interface Array { //extends import('../richtext').RichText {
+  serializeRichText(...args: any[]): string;
+}

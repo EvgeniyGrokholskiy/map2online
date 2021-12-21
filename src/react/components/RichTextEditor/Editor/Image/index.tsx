@@ -21,7 +21,7 @@ import Button from '../../Toolbar/Button';
 import Icon from '../../Icon';
 import log from '../../../../../log';
 import './style.scss';
-import {ImageElement} from '../../types';
+import {ImageElement} from '../../../../../slate/types';
 
 export type ImageProps = RenderElementProps & { element: ImageElement };
 

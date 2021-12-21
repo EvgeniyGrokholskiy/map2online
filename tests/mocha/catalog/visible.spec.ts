@@ -317,7 +317,7 @@ describe('Catalog visibleFeatures', () => {
 
     beforeEach(async () => {
       category1 = catalog.categories.byPos(0);
-      await catalog.categories.add({description: '', id: null, open: false, summary: '', title: '', visible: true});
+      await catalog.categories.add({description: [], id: null, open: false, summary: '', title: '', visible: true});
       category2 = catalog.categories.byPos(1);
       route11 = category1.routes.byPos(0);
       await category1.routes.add({description: '', id: null, open: true, summary: '', title: 'r2', visible: true});

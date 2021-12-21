@@ -1,4 +1,4 @@
-import {Catalog, Categories, Category, Feature, ID, Route} from '../index';
+import {Catalog, Categories, Category, CategoryProps, Feature, FeatureProps, ID, Route, RouteProps} from '../index';
 import {CatalogStorage} from '../storage';
 import {FeatureDefault} from './feature';
 import {Observable, Subject} from 'rxjs';
@@ -109,21 +109,21 @@ export class CatalogDefault implements Catalog {
 
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     await Promise.all(featuresIdsFlat.map(id => this.storage.readFeatureProps(id)
-      .then(props => {
+      .then((props: FeatureProps) => {
         if (props !== null) {
           const feature = new FeatureDefault(this, props);
           this.featuresCache[feature.id] = feature;
         }
       })));
     await Promise.all(routesIdsFlat.map(id => this.storage.readRouteProps(id)
-      .then(props => {
+      .then((props: RouteProps | null) => {
         if (props !== null) {
           const route = new RouteDefault(this, props);
           this.routesCache[route.id] = route;
         }
       })));
     await Promise.all(categoriesIdsFlat.map(id => this.storage.readCategoryProps(id)
-      .then(props => {
+      .then((props: CategoryProps | null) => {
         if (props !== null) {
           const category = new CategoryDefault(this, props);
           this.categoriesCache[category.id] = category;

@@ -19,7 +19,7 @@ import React from 'react';
 import {ReactElement} from 'react';
 import log from '../../../../log';
 import Image, {ImageProps} from './Image';
-import {RichTextElement} from '../types';
+import {RichTextElement} from '../../../../slate/types';
 import {DefaultElement, RenderElementProps} from 'slate-react';
 import Link, {LinkProps} from './link';
 

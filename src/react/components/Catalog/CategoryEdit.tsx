@@ -22,7 +22,7 @@ import {Category} from '../../../catalog';
 import useObservable from '../../hooks/useObservable';
 import T from '../../../l10n';
 import {map} from 'rxjs/operators';
-import RichText from '../RichText';
+import RichTextEditor from '../RichTextEditor';
 
 const wording = getWording();
 const catalogUI = getCatalogUI();
@@ -85,7 +85,7 @@ const CategoryEdit: React.FunctionComponent<{ category: Category }> = ({category
             value={category.description} />
         */}
 
-        <RichText />
+        <RichTextEditor content={category.description} onChange={content => {category.description = content;}}/>
       </div >
 
       <div className="buttons-row" >

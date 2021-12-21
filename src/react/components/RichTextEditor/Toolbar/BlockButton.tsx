@@ -20,7 +20,7 @@ import Button from './Button';
 import log from '../../../../log';
 import {BaseEditor, Editor, Node, Element as SlateElement, Transforms} from 'slate';
 import Icon from '../Icon';
-import {RichTextElement} from '../types';
+import {RichTextElement} from '../../../../slate/types';
 
 const isBlockActive = (editor: BaseEditor, format: string) => {
   const { selection } = editor;

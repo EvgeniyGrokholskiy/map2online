@@ -15,7 +15,7 @@
  */
 
 import {BaseEditor, Editor, Range, Transforms} from 'slate';
-import {LinkElement, RichTextElement} from '../../types';
+import {LinkElement, RichTextElement} from '../../../../../slate/types';
 
 export const isLinkActive = (editor: BaseEditor): boolean => {
   const [link] = Editor.nodes(editor, {

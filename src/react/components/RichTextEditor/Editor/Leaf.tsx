@@ -15,7 +15,7 @@
  */
 
 import React, {ReactElement} from 'react';
-import {StyledText} from '../types';
+import {StyledText} from '../../../../slate/types';
 import log from '../../../../log';
 import {RenderElementProps} from 'slate-react';
 
