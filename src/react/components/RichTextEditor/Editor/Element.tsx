@@ -19,8 +19,8 @@ import React from 'react';
 import {ReactElement} from 'react';
 import log from '../../../../log';
 import Image, {ImageProps} from './Image';
-import {RichTextElement} from '../../../../slate/types';
-import {DefaultElement, RenderElementProps} from 'slate-react';
+import {RichTextElement, RichTextElementType} from '../../../../richtext';
+import {RenderElementProps} from 'slate-react';
 import Link, {LinkProps} from './link';
 
 type ElementProps = RenderElementProps & { element: RichTextElement};
@@ -28,40 +28,46 @@ const Element = (props: ElementProps): ReactElement => {
   const { attributes, children, element } = props;
   log.render('RichText Element', {attributes, children, element});
   switch (element.type) {
-    case 'block-quote':
+    case RichTextElementType.BlockQuote:
       // eslint-disable-next-line react/react-in-jsx-scope
       return <blockquote {...attributes}>
         {children}
       </blockquote>;
-    case 'bulleted-list':
+    case RichTextElementType.BulletedList: //'bulleted-list':
       return <ul {...attributes}>
         {children}
       </ul>;
-    case 'heading-one':
+    case RichTextElementType.HeadingOne: //'heading-one':
       return <h1 {...attributes}>
         {children}
       </h1>;
-    case 'heading-two':
+    case RichTextElementType.HeadingTwo: //'heading-two':
       return <h2 {...attributes}>
         {children}
       </h2>;
-    case 'list-item':
+    case RichTextElementType.ListItem: //'list-item':
       return <li {...attributes}>
         {children}
       </li>;
-    case 'numbered-list':
+    case RichTextElementType.NumberedList: //'numbered-list':
       return <ol {...attributes}>
         {children}
       </ol>;
-    case 'image': {
+    case RichTextElementType.Image: { //'image': {
       const imageProps = props as ImageProps;
       return <Image {...imageProps} />;
     }
-    case 'link': {
+    case RichTextElementType.Link: { //'link': {
       const linkProps = props as LinkProps;
       return <Link {...linkProps} />;
     }
+    case RichTextElementType.Paragraph: {
+      return <p {...attributes}>
+        {children}
+      </p>;
+    }
     default:
+      log.error(`Unknown RichText element type = ${element.type}`, element);
       return <p {...attributes}>
         {children}
       </p>;

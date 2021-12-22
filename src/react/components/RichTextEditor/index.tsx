@@ -28,15 +28,15 @@ import Element from './Editor/Element';
 import BlockButton from './Toolbar/BlockButton';
 import InsertImageButton from './Toolbar/InsertImageButton';
 import withImages from './Editor/Image/withImage';
-import {EmptyText, RichTextElement} from '../../../slate/types';
+import {RichTextElementType} from '../../../richtext';
 import AddLinkButton from './Toolbar/AddLinkButton';
 import RemoveLinkButton from './Toolbar/RemoveLinkButton';
 import withInlines from './Editor/Inlines/withInlines';
 import {RichText} from '../../../richtext';
 
-const emptyValue: (RichTextElement | EmptyText)[] = [
+const emptyValue: RichText = [
   {
-    type: 'paragraph',
+    type: RichTextElementType.Paragraph,
     children: [{text: ''}],
   },
 ];

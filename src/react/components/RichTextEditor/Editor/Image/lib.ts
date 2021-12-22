@@ -17,17 +17,16 @@
 import {BaseEditor, Transforms, Node} from 'slate';
 import isUrl from 'is-url';
 import imageExtensions from 'image-extensions';
-import {EmptyText} from '../../../../../slate/types';
+import {StyledText} from '../../../../../richtext';
 
 type ImageElement = {
   type: 'image'
   url: string
-  children: EmptyText[]
+  children: StyledText[]
 }
 
 export const insertImage = (editor: BaseEditor, url: string): void => {
-  const text: EmptyText = { text: '' };
-  const image: ImageElement = { type: 'image', url, children: [text] };
+  const image: ImageElement = { type: 'image', url, children: [] };
   const trailingPara = {type: 'paragraph', children: [{text: ''}]} as unknown as Node;
   Transforms.insertNodes(editor, image);
   Transforms.insertNodes(editor, trailingPara);

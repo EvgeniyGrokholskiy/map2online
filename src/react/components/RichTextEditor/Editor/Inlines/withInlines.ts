@@ -17,7 +17,7 @@
 import {ReactEditor} from 'slate-react';
 import isUrl from 'is-url';
 import {wrapLink} from '../link/lib';
-import {RichTextElement} from '../../../../../slate/types';
+import {RichTextElement} from '../../../../../richtext';
 
 const withInlines = (editor: ReactEditor): ReactEditor => {
   const { insertData, insertText, isInline } = editor;

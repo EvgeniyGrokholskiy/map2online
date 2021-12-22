@@ -15,7 +15,7 @@
  */
 
 import {BaseEditor, Editor, Range, Transforms} from 'slate';
-import {LinkElement, RichTextElement} from '../../../../../slate/types';
+import {LinkElement, RichTextElement, RichTextElementType} from '../../../../../richtext';
 
 export const isLinkActive = (editor: BaseEditor): boolean => {
   const [link] = Editor.nodes(editor, {
@@ -40,7 +40,7 @@ export const wrapLink = (editor: BaseEditor, url: string):void => {
   const { selection } = editor;
   const isCollapsed = selection && Range.isCollapsed(selection);
   const link: LinkElement = {
-    type: 'link',
+    type: RichTextElementType.Link, //'link',
     url,
     children: isCollapsed ? [{ text: url }] : [],
   };

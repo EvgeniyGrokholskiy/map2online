@@ -16,4 +16,5 @@
 
 declare interface Array { //extends import('../richtext').RichText {
   serializeRichText(...args: any[]): string;
+  serializePlainText(...args: any[]): string;
 }

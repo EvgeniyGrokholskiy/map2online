@@ -20,7 +20,7 @@ import Button from './Button';
 import log from '../../../../log';
 import {BaseEditor, Editor, Node, Element as SlateElement, Transforms} from 'slate';
 import Icon from '../Icon';
-import {RichTextElement} from '../../../../slate/types';
+import {RichTextElement, RichTextElementType} from '../../../../richtext';
 
 const isBlockActive = (editor: BaseEditor, format: string) => {
   const { selection } = editor;
@@ -46,7 +46,7 @@ const toggleBlock = (editor: Editor, format: string) => {
     match: (n: RichTextElement): boolean =>
       !Editor.isEditor(n) &&
       SlateElement.isElement(n) &&
-      LIST_TYPES.includes(n.type) || n.type === 'block-quote',
+      LIST_TYPES.includes(n.type) || n.type === RichTextElementType.BlockQuote,
     split: true,
   });
 
