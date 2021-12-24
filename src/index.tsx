@@ -17,6 +17,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import '../../../extensions/array+serializePlainText';
+
 import 'reset-css';
 import 'normalize.css';
 import 'styles.scss';

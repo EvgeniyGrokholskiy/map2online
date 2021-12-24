@@ -81,7 +81,7 @@ const foldersOfCategoriesRecursive = (folders: ImportedFolder[], categories: Imp
 const foldersOfCategories = (folders: ImportedFolder[]): ImportedFolder[] => foldersOfCategoriesRecursive(folders, []);
 
 const folderToCategory = (folder: ImportedFolder): CategoryProps => ({
-  description: folder.description ? folder.description.toRichText() : [],
+  description: folder.description ? folder.description.parseToRichText() : [],
   id: null,
   summary: '',
   title: folder.name,

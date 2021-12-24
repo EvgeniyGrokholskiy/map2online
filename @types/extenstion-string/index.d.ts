@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
+type RichText = import('../richtext').RichText;
+
 declare interface String {
   format(...args: any[]): string;
-  toRichText(...args: any[]): import('../richtext').RichText;
+  parseToRichText(): RichText;
+  convertToRichText(): RichText;
 }

@@ -25,7 +25,7 @@ describe('Test string extension', () => {
   });
   it('toRichText', () => {
     const serialized = '[{"a": 1}, {"b": 2}]';
-    const richText = serialized.toRichText();
+    const richText = serialized.parseToRichText();
     expect(richText.length).to.be.eq(2);
     expect(richText[0]).to.be.eql({a: 1});
     expect(richText[1]).to.be.eql({b: 2});

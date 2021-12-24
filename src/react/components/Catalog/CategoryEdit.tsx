@@ -23,7 +23,7 @@ import useObservable from '../../hooks/useObservable';
 import T from '../../../l10n';
 import {map} from 'rxjs/operators';
 import RichTextEditor from '../RichTextEditor';
-import '../../../extensions/array+serializePlainText';
+import log from '../../../log';
 
 const wording = getWording();
 const catalogUI = getCatalogUI();
@@ -38,6 +38,7 @@ const handleSubmit: (ev: FormEvent) => void = (ev: FormEvent) => {
 const handleClose = () => catalogUI.cancelEditCategory();
 
 const CategoryEdit: React.FunctionComponent<{ category: Category }> = ({category: categoryEdit}): React.ReactElement => {
+  log.render('CategoryEdit', categoryEdit);
 
   const category = useObservable(
     categoryEdit.observable()
@@ -87,7 +88,7 @@ const CategoryEdit: React.FunctionComponent<{ category: Category }> = ({category
         */}
 
         <RichTextEditor content={category.description} onChange={content => {
-          category.description = content;
+          categoryEdit.description = content;
         }}/>
       </div >
 

@@ -17,8 +17,8 @@
 import * as React from 'react';
 import log from '../../../log';
 import './style.scss';
-import {useCallback, useMemo, useState} from 'react';
-import {Descendant, createEditor} from 'slate';
+import {memo, useCallback, useMemo, useState} from 'react';
+import {createEditor} from 'slate';
 import {Editable, ReactEditor, Slate, withReact} from 'slate-react';
 import {withHistory} from 'slate-history';
 import {Toolbar} from './Toolbar';
@@ -42,19 +42,19 @@ const emptyValue: RichText = [
 ];
 
 const RichTextEditor: React.FunctionComponent<{ content: RichText, onChange?: (value: RichText) => void }> =
-  ({content, onChange}): React.ReactElement => {
+  ({content, onChange: handleChange}): React.ReactElement => {
     log.render('RichText Editor');
 
     const initialValue = content && content.length ? content : emptyValue;
 
-    const [value, setValue] = useState<Descendant[]>(initialValue);
+    //const [value, setValue] = useState<Descendant[]>(initialValue);
     const editor = useMemo(() => withInlines(withImages(withHistory(withReact(createEditor() as ReactEditor)))), []);
     const renderElement = useCallback(props => <Element {...props} />, []);
     const renderLeaf = useCallback(props => <Leaf {...props} />, []);
-    const updateValue = useCallback(value => {setValue(value); onChange(value);}, [setValue]);
+    //const updateValue = useCallback(value => {/*setValue(value);*/onChange(value);}, [/*setValue*/]);
 
     return <div className="rich-text" >
-      <Slate editor={editor} onChange={v => updateValue(v)} value={value} >
+      <Slate editor={editor} onChange={handleChange} value={initialValue} >
         <Toolbar >
           <MarkButton format="bold" icon="format_bold" />
 
@@ -95,4 +95,5 @@ const RichTextEditor: React.FunctionComponent<{ content: RichText, onChange?: (v
     </div >;
   };
 
-export default RichTextEditor;
+export default memo(RichTextEditor);
+

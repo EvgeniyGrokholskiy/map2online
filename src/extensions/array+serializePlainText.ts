@@ -2,7 +2,7 @@ import {RichText, RichTextDescendant} from '../richtext';
 import {
   RichTextElement,
   RichTextElementType,
-  StyledText
+  StyledText,
 } from '../richtext';
 import log from '../log';
 
@@ -10,36 +10,35 @@ const nodes2plaintext = (nodes: RichTextDescendant[]): string =>
   nodes.reduce<string>((plain: string, node: RichTextDescendant): string => plain + node2plaintext(node), '');
 
 const listitems2plaintext = (nodes: RichTextDescendant[]): string =>
-  nodes.reduce<string>((plain: string, node: RichTextDescendant): string => plain + '  - ' + node2plaintext(node), '');
+  nodes.reduce<string>((plain: string, node: RichTextDescendant): string => `${plain}  - ${node2plaintext(node)}`, '');
 
 const olistitems2plaintext = (nodes: RichTextDescendant[]): string =>
-  nodes.reduce<string>((plain: string, node: RichTextDescendant, i): string => plain + `  ${i + 1} ` + node2plaintext(node), '');
+  nodes.reduce<string>((plain: string, node: RichTextDescendant, i): string => `${plain}  ${i + 1} ${node2plaintext(node)}`, '');
 
 const node2plaintext = (node: RichTextDescendant | StyledText): string => {
-  console.log('node2plaintext', node);
   if (RichTextElement.isElement(node)) {
     switch (node.type) {
       case RichTextElementType.BlockQuote:
-        return '\n--\n' + nodes2plaintext(node.children) + '\n--\n';
+        return `\n--\n${nodes2plaintext(node.children)}\n--\n`;
       case RichTextElementType.BulletedList:
-        return '\n' + listitems2plaintext(node.children) + '\n';
+        return `\n${listitems2plaintext(node.children)}\n`;
       case RichTextElementType.HeadingOne:
-        return '\n' + nodes2plaintext(node.children) + '\n';
+        return `\n${nodes2plaintext(node.children)}\n`;
       case RichTextElementType.HeadingTwo:
-        return '\n' + nodes2plaintext(node.children) + '\n';
+        return `\n${nodes2plaintext(node.children)}\n`;
       case RichTextElementType.ListItem:
-        return nodes2plaintext(node.children) + '\n';
+        return `${nodes2plaintext(node.children)}\n`;
       case RichTextElementType.NumberedList:
-        return '\n' + olistitems2plaintext(node.children) + '\n';
+        return `\n${olistitems2plaintext(node.children)}\n`;
       case RichTextElementType.Image:
-        return nodes2plaintext(node.children) + '(' + node.url + ')';
+        return `${nodes2plaintext(node.children)}(${node.url})`;
       case RichTextElementType.Link:
-        return nodes2plaintext(node.children) + '(' + node.url + ')';
+        return `${nodes2plaintext(node.children)}(${node.url})`;
       case RichTextElementType.Paragraph:
-        return nodes2plaintext(node.children) + '\n';
+        return `${nodes2plaintext(node.children)}\n`;
       default:
         log.error(`Unknown RichText element type = ${node.type}`, node);
-        return '\n' + nodes2plaintext(node.children) + '\n';
+        return `\n${nodes2plaintext(node.children)}\n`;
     }
   } else if (StyledText.isText(node)) {
     return node.text;
@@ -50,7 +49,8 @@ const node2plaintext = (node: RichTextDescendant | StyledText): string => {
 };
 
 if (!Array.prototype.serializePlainText) {
+  // eslint-disable-next-line no-extend-native,func-names
   Array.prototype.serializePlainText = function (this: RichText): string {
-   return nodes2plaintext(this);
-  }
+    return nodes2plaintext(this);
+  };
 }

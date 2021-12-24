@@ -18,7 +18,6 @@ import {Category, Coordinate, Feature, LineString, Point, Route, isPoint} from '
 import {metersToDegrees} from '../../lib/projection';
 import {henc} from '../../lib/entities';
 import {IconStyle, LineStyle, Style} from '../../style';
-import '../../../src/extensions/array+serializeRichText';
 
 const PREC = 6;
 export const formatCoordinate = (lonLat: Coordinate): string => {
@@ -41,7 +40,8 @@ const categoryBegin = (ident: string, category?: Category): string =>
   category
     ? `${ident}<Folder id="${category.id}">
 ${ident}  <name><![CDATA[${henc(category.title)}]]></name>
-${ident}  <description><![CDATA[${henc(category.description.serializeRichText())}]]></description>
+${ident}  <description><![CDATA[${henc(category.description.serializePlainText())}]]></description>
+${ident}  <ExtendedData><Data name="rt_description"><value><![CDATA[${henc(category.description.serializeRichText())}]]></value></Data></ExtendedData>
 `
     : '';
 
