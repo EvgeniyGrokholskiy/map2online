@@ -77,19 +77,11 @@ const CategoryEdit: React.FunctionComponent<{ category: Category }> = ({category
           {T`Description`}
         </label >
 
-        {/*
-          <textarea
-            name="description"
-            onChange={(ev): void => {
-              categoryEdit.description = ev.target.value;
-            }}
-            rows={10}
-            value={category.description} />
-        */}
-
-        <RichTextEditor content={category.description} onChange={content => {
-          categoryEdit.description = content;
-        }}/>
+        <RichTextEditor
+          content={category.description}
+          onChange={content => {
+            categoryEdit.description = content;
+          }} />
       </div >
 
       <div className="buttons-row" >

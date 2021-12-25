@@ -50,7 +50,7 @@ const node2plaintext = (node: RichTextDescendant | StyledText): string => {
 
 if (!Array.prototype.serializePlainText) {
   // eslint-disable-next-line no-extend-native,func-names
-  Array.prototype.serializePlainText = function (this: RichText): string {
+  Array.prototype.serializePlainText = function (): string {
     return nodes2plaintext(this);
   };
 }

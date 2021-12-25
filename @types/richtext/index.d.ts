@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-declare interface Array { //extends import('../richtext').RichText {
-  serializeRichText(...args: any[]): string;
-  serializePlainText(...args: any[]): string;
+declare interface Array { // extends import('../richtext').RichText {
+  serializeRichText(): string;
+  serializePlainText(): string;
 }

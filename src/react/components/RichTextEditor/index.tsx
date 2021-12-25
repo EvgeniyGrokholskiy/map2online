@@ -47,11 +47,11 @@ const RichTextEditor: React.FunctionComponent<{ content: RichText, onChange?: (v
 
     const initialValue = content && content.length ? content : emptyValue;
 
-    //const [value, setValue] = useState<Descendant[]>(initialValue);
+    // const [value, setValue] = useState<Descendant[]>(initialValue);
     const editor = useMemo(() => withInlines(withImages(withHistory(withReact(createEditor() as ReactEditor)))), []);
     const renderElement = useCallback(props => <Element {...props} />, []);
     const renderLeaf = useCallback(props => <Leaf {...props} />, []);
-    //const updateValue = useCallback(value => {/*setValue(value);*/onChange(value);}, [/*setValue*/]);
+    // const updateValue = useCallback(value => {/*setValue(value);*/onChange(value);}, [/*setValue*/]);
 
     return <div className="rich-text" >
       <Slate editor={editor} onChange={handleChange} value={initialValue} >
@@ -85,9 +85,9 @@ const RichTextEditor: React.FunctionComponent<{ content: RichText, onChange?: (v
           <RemoveLinkButton />
 
         </Toolbar >
+
         <Editable
           className="rich-textarea"
-          placeholder="Enter some plain text..."
           renderElement={renderElement}
           renderLeaf={renderLeaf}
         />

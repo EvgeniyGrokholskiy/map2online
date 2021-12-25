@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 /*
  * Copyright 2021 s4y.solutions
  *

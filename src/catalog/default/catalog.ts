@@ -45,7 +45,7 @@ export class CatalogDefault implements Catalog {
 
   readonly subjectVisibleFeatures = new Subject<Feature[]>();
 
-  readonly observableVisisbleFeaturesDebounced = this.subjectVisibleFeatures.pipe(debounceTime(DEBOUNCE_DELAY));
+  readonly observableVisisbleFeaturesDebounced: Observable<Feature[]>;
 
   notifyVisisbleFeaturesChanged: () => void;
 
@@ -59,6 +59,8 @@ export class CatalogDefault implements Catalog {
     this.storage = storage;
     this.wording = wording;
     this.map2styles = map2styles;
+    this.observableVisisbleFeaturesDebounced = this.subjectVisibleFeatures.pipe(debounceTime(DEBOUNCE_DELAY));
+    this.categories = new CategoriesDefault(this, catalogId);
     this.notifyVisisbleFeaturesChanged = () => {
       const prevVisibleIds = this.visibleIds;
       const prevLength = this.visibleFeatures.length;
@@ -86,7 +88,6 @@ export class CatalogDefault implements Catalog {
         this.subjectVisibleFeatures.next(this.visibleFeatures);
       }
     };
-    this.categories = new CategoriesDefault(this, catalogId);
   }
 
   async init(): Promise<CatalogDefault> {
@@ -129,10 +130,13 @@ export class CatalogDefault implements Catalog {
           this.categoriesCache[category.id] = category;
         }
       })));
+    const length = this.categories.length;
     if (autoCreate) {
       this.enableAutoCreateCategoryAndRoute();
     }
-    this.notifyVisisbleFeaturesChanged();
+    if (length > 0) {
+      this.notifyVisisbleFeaturesChanged();
+    }
     return this;
   }
 
@@ -160,15 +164,19 @@ export class CatalogDefault implements Catalog {
 
   autoCreate = true;
 
-  disableAutoCreateCategoryAndRoute() {
+  disableAutoCreateCategoryAndRoute(): boolean {
     const ret = this.autoCreate;
     this.autoCreate = false;
     return ret;
   }
 
-  enableAutoCreateCategoryAndRoute() {
+  enableAutoCreateCategoryAndRoute(): boolean {
     const ret = this.autoCreate;
     this.autoCreate = true;
     return ret;
+  }
+
+  setAutoCreateCategoryAndRoute(enabled: boolean): void {
+    this.autoCreate = enabled;
   }
 }

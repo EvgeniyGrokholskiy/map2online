@@ -36,6 +36,7 @@ import {
   PolyStyle,
   Style,
 } from '../../style';
+import {makeEmptyRichText} from '../../richtext';
 
 enum ParseState {
   NONE,
@@ -174,7 +175,7 @@ export const parseKMLString = (file: File, kml: string, map2styles: Map2Styles):
           currentFeature = {
             styleId: makeId(),
             style: null,
-            description: '',
+            description: makeEmptyRichText(),
             geometry: null,
             id: null, // TODO: handle duplicate parseId(node),
             summary: '',
@@ -513,7 +514,7 @@ export const parseKMLString = (file: File, kml: string, map2styles: Map2Styles):
           currentExtendedData.value = text.trim();
           break;
         case ParseState.PLACEMARK_DESCRIPTION:
-          currentFeature.description = text.trim();
+          currentFeature.description = text.trim().convertToRichText();
           break;
         case ParseState.PLACEMARK_VISIBILITY:
           currentFeature.visible = text.trim().toUpperCase() != 'FALSE';
@@ -588,7 +589,7 @@ export const parseKMLString = (file: File, kml: string, map2styles: Map2Styles):
           currentFeature.title = cdata.trim();
           break;
         case ParseState.PLACEMARK_DESCRIPTION:
-          currentFeature.description = cdata.trim();
+          currentFeature.description = cdata.trim().convertToRichText();
           break;
       }
     };

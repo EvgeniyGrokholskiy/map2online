@@ -7,11 +7,11 @@ export type StyledText = {
 }
 
 export interface StyledTextInterface {
-  isText: (value: any) => value is StyledText;
+  isText: (value: unknown) => value is StyledText;
 }
 
 export const StyledText: StyledTextInterface = {
-  isText: (value: any): value is StyledText => (value as StyledText).text !== undefined
+  isText: (value: unknown): value is StyledText => (value as StyledText).text !== undefined,
 };
 
 export enum RichTextElementType {
@@ -65,9 +65,18 @@ export const RichTextElement: RichTextElementInterface = {
 export type RichText = RichTextDescendant[];
 
 export interface RichTextInterface {
-  stringify: (this: RichText) => string;
+  stringify: () => string;
 }
 
 export const RichText: RichTextInterface = {
-  stringify: function (this: RichText) {return JSON.stringify(this)}
+  stringify () {
+    return JSON.stringify(this);
+  },
 };
+
+export const makeEmptyRichText: () => RichText = () => [
+  {
+    type: RichTextElementType.Paragraph,
+    children: [{text: ''}],
+  },
+];
